@@ -38,6 +38,21 @@ class Contact extends React.Component {
 		this.handleEdit = this.handleEdit.bind(this);
 	}
 
+	componentWillMount() {
+		const contactData = localStorage.contactData;
+		if (contactData) {
+			this.setState({
+				contactData: JSON.parse(contactData),
+			});
+		}
+	}
+	componentDidUpdate(prevProps, prevState) {
+		if (JSON.stringify(prevState.contactData) !== JSON.stringify(this.state.contactData)) {
+			console.log('different');
+			localStorage.contactData = JSON.stringify(this.state.contactData);
+		}
+	}
+
 	handleChange(e) {
 		this.setState({
 			keyword: e.target.value,
@@ -66,13 +81,22 @@ class Contact extends React.Component {
 
 	handleEdit(name, phone) {
 		this.setState({
-			contactData: update(this.state.contactData, {
-				[this.state.selectedKey]: {
-					name: { $set: name },
-					phone: { $set: phone },
-				},
+			contactData: this.state.contactData.map((el, index) => {
+				if (index === this.state.selectedKey) {
+					el.name = name;
+					el.phone = phone;
+				}
+				return el;
 			}),
 		});
+		// this.setState({
+		// 	contactData: update(this.state.contactData, {
+		// 		[this.state.selectedKey]: {
+		// 			name: { $set: name },
+		// 			phone: { $set: phone },
+		// 		},
+		// 	}),
+		// });
 	}
 	render() {
 		const mapToComponents = data => {
