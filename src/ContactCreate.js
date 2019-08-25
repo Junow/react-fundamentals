@@ -43,7 +43,7 @@ class ContactCreate extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="contact_create_container">
 				<h2>Create Contact</h2>
 				<div>
 					<input
@@ -56,6 +56,7 @@ class ContactCreate extends React.Component {
 							this.nameInput = ref;
 						}}
 					/>
+					<br />
 					<input
 						type="text"
 						name="phone"

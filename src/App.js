@@ -1,13 +1,15 @@
 import React from 'react';
 import Contact from './Contact';
+import './App.css';
 
-class App extends React.Component{
-  render(){
-    return (
-      <div><Contact/>
-      </div>
-    );
-  }
+class App extends React.Component {
+	render() {
+		return (
+			<div className="App">
+				<Contact />
+			</div>
+		);
+	}
 }
 
 export default App;

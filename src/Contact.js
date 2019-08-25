@@ -3,6 +3,7 @@ import ContactInfo from './ContactInfo';
 import ContactDetails from './ContactDetails';
 import update from 'react-addons-update';
 import ContactCreate from './ContactCreate';
+import './Contact.css';
 
 class Contact extends React.Component {
 	constructor(props) {
@@ -111,14 +112,19 @@ class Contact extends React.Component {
 
 		return (
 			<div>
-				<h1>contacts</h1>
-				<input
-					name="keyword"
-					placeholder="Search"
-					value={this.state.keyword}
-					onChange={this.handleChange}
-				/>
-				<div>{mapToComponents(this.state.contactData)}</div>
+				<h1 className="contact_header">Contacts</h1>
+				<div>
+					<p className="search_item">Search: </p>
+					<input
+						name="keyword"
+						placeholder="Name for Search"
+						value={this.state.keyword}
+						onChange={this.handleChange}
+						className="search_item search_input"
+					/>
+				</div>
+
+				<div className="contacts">{mapToComponents(this.state.contactData)}</div>
 				<ContactDetails
 					isSelected={this.state.selectedKey != -1}
 					contact={this.state.contactData[this.state.selectedKey]}
